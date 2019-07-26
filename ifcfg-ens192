@@ -1,0 +1,9 @@
+TYPE=Ethernet
+BOOTPROTO=static
+NAME=ens192
+DEVICE=ens192
+ONBOOT=yes
+IPADDR=10.1.1.1
+NETMASK=255.255.255.0
+ETHTOOL_OPTS="autoneg off speed 1000 duplex full"
+ZONE=internal
