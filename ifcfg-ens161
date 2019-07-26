@@ -1,0 +1,7 @@
+TYPE="Ethernet"
+BOOTPROTO="dhcp"
+NAME="ens161"
+DEVICE="ens161"
+ONBOOT="yes"
+ETHTOOL_OPTS="autoneg off speed 1000 duplex full"
+ZONE="external"
