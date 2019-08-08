@@ -1,0 +1,9 @@
+firewalld commands
+# Allow port forwarding from internal network DNS to internal DNS server
+# Then forward DNS requests from DNS server to external DNS
+
+firewall-cmd --zone=external --add-masquerade --permanent
+firewall-cmd --zone=internal --add-masquerade --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=53 protocol=udp to-port=53 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 source address=10.1.1.10 forward-port port=53 protocol=udp to-port=53 to-addr=10.180.18.1' --permanent
+firewall-cmd --reload
