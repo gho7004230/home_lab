@@ -13,15 +13,23 @@ firewall-cmd --reload
 # Ports to Join the Windows Domain
 
 firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=88 protocol=udp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=135 protocol=udp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=135 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=138 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=139 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=135 protocol=udp to-port=135 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=135 protocol=tcp to-port=135 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=138 protocol=tcp to-port=138 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=139 protocol=tcp to-port=139 to-addr=10.1.1.10' --permanent
 firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=389 protocol=udp to-port=389 to-addr=10.1.1.10' --permanent
 firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=389 protocol=tcp to-port=389 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=445 protocol=udp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=445 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=464 protocol=udp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=464 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=3268 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
-firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=3269 protocol=tcp to-port=88 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=445 protocol=udp to-port=445 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=445 protocol=tcp to-port=445 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=464 protocol=udp to-port=464 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=464 protocol=tcp to-port=464 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=3268 protocol=tcp to-port=3268 to-addr=10.1.1.10' --permanent
+firewall-cmd --zone=internal --add-rich-rule 'rule family=ipv4 forward-port port=3269 protocol=tcp to-port=3269 to-addr=10.1.1.10' --permanent
+
+#Whitelist IPs
+
+firewall-cmd --zone=external --add-source=192.168.1.0/24 --permanent
+firewall-cmd --zone=external --add-source=192.168.2.0/24 --permanent
+firewall-cmd --zone=external --add-source=192.168.3.0/24 --permanent
+firewall-cmd --zone=external --add-source=10.1.1.0/24 --permanent
+firewall-cmd --reload
