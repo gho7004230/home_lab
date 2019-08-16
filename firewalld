@@ -33,3 +33,16 @@ firewall-cmd --zone=external --add-source=192.168.2.0/24 --permanent
 firewall-cmd --zone=external --add-source=192.168.3.0/24 --permanent
 firewall-cmd --zone=external --add-source=10.1.1.0/24 --permanent
 firewall-cmd --reload
+
+#Add NAT
+$ vi /etc/sysctl.conf
+	net.ipv4.ip_forward = 1
+	net.ipv4.conf.default.rp_filter = 1
+
+firewall-cmd –permanent --direct –passthrough ipv4 –t nat –I POSTROUTING –o ensXXX (public NIC) –j MASQUERADE –s 192.168.128.0/24 (private network)
+$ firewall-cmd --change-interface=ensXXX (public NIC) --zone=external --permanent
+$ firewall-cmd --set-default-zone=internal
+$ firewall-cmd --complete-reload
+$ systemctl restart network && systemctl restart firewalld
+$sysctl -p
+
