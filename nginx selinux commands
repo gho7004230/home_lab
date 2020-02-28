@@ -1,0 +1,7 @@
+#To Proxy Gitlab Server on Port 8443 and Mattermost on 8444:
+
+semanage fcontext -a -t NetworkManager_exec_t '/ssl/gitlab.glennet.lab.key'
+semanage fcontext -a -t NetworkManager_exec_t '/ssl/gitlab.glennet.lab.crt'
+semanage port -a -t http_port_t -p tcp 8444
+semanage port -a -t http_port_t -p tcp 8443
+systemctl restart nginx
