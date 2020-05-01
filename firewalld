@@ -39,7 +39,8 @@ $ vi /etc/sysctl.conf
 	net.ipv4.ip_forward = 1
 	net.ipv4.conf.default.rp_filter = 1
 
-firewall-cmd –permanent --direct –passthrough ipv4 –t nat –I POSTROUTING –o ensXXX (public NIC) –j MASQUERADE –s 192.168.128.0/24 (private network)
+firewall-cmd –-permanent --direct –-passthrough ipv4 –t nat –I POSTROUTING –o ensXXX (public NIC) –j MASQUERADE –s 192.168.128.0/24 (private network)
+firewall-cmd --permanent --direct --passthrough ipv4 -t nat -I POSTROUTING -o ens256 -j MASQUERADE -s 10.1.1.0/24
 $ firewall-cmd --change-interface=ensXXX (public NIC) --zone=external --permanent
 $ firewall-cmd --set-default-zone=internal
 $ firewall-cmd --complete-reload
