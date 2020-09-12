@@ -1,0 +1,103 @@
+Log into vcenter server via putty
+
+run command: shell
+
+run command: /usr/lib/vmware-vmca/bin/certificate-manager
+
+select option 1
+select default administrator account
+enter password
+select option 1
+enter csr information:
+Country      : Two uppercase letters only (Eg. US), the country where your company is located.
+Name         : FQDN of the vCenter Server
+Organization : Company Name
+OrgUnit      : The name of your department within the organization. Example: "IT"
+State        : The state/province where your company is located
+Locality     : The city where your company is located.
+IPAddress    : IP Address of vCenter Server, this field is Optional
+Email        : Email Address
+Hostname     : FQDN of vCenter Server
+VMCA Name    : FQDN of vCenter Server with VMCA (Usually External PSC or VC with Embedded PSC FQDN)
+
+**The files created will have the names vmca_issued_csr.csr and vmca_issued_key.key.**
+
+select option to exit
+
+run command: mv vmca_issued_csr.csr {hostname}.csr
+
+run command: mv vmca_issued_key.key {hostname}.key
+
+cat both files and paste into a notepad file on your desktop
+
+go to your ca server: https://ca.glennet.lab/certsrv and enter the csr, then download the crt (base 64 cer)
+
+open the cert in nopepad, copy the text, and past into a file on the vcenter server called vc.crt
+
+open the root cert in notepad, copy the text, and past into a file on the vcenter server called root.crt
+
+run command: /usr/lib/vmware-vmca/bin/certificate-manager
+
+select option 1
+select default administrator account
+enter password
+select option 2
+
+enter the following information at the prompts:
+Please provide valid custom certificate for Machine SSL.
+File : {hostname}.crt
+ 
+Please provide valid custom key for Machine SSL.
+File : {hostname}.key
+ 
+Please provide the signing certificate of the Machine SSL certificate.
+File : root.crt
+
+Answer Yes (Y) to the confirmation request to proceed.
+
+Service will restart when complete.
+
+---------------------------------------------------------------
+
+update port 5480 SSL (If URL does not go https by default):
+
+Log into vcenter server via putty
+
+run command: shell
+
+run command: cp root.crt /etc/applmgmt/appliance/ca.crt
+
+open the /opt/vmware/etc/lighttpd/lighttpd.conf in vi editor
+
+Add the entry at the end of file or after line "ssl.engine= "enable"":
+
+ssl.ca-file="/etc/applmgmt/appliance/ca.crt"
+
+save file
+
+Open the file /etc/vmware/backup/manifests/applmgmt.json
+
+Add the entry  "/etc/applmgmt/appliance/ca.crt" in locations list
+------------------------------------------------------------------
+{
+  "component": "Appliance Management",
+  "parts": [
+     {
+        "locations": [
+          "/etc/applmgmt/appliance/appliance.conf",
+          "/etc/applmgmt/appliance/authorization.conf",
+          "/etc/applmgmt/firstboot/applmgmt.properties",
+          "/etc/vmware/appliance/dcui.cfg",
+          "/etc/applmgmt/appliance/update.conf",
+          "/etc/applmgmt/appliance/ca.crt"
+        ]
+     }
+  ],
+  "deploymentType": ["all"]
+}
+------------------------------------------------------------------
+save file
+
+run command: /sbin/service vami-lighttp restart
+
+Done
