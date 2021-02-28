@@ -1,0 +1,9 @@
+cd "c:\Program Files\Oracle\VirtualBox"
+
+vboxmanage list vms
+--------------------
+"Windows10" {be39e7f2-b16d-4bfb-8f85-1adf88ceac03}
+"Teacher_Desktop" {ca08b845-0445-4865-a3b5-4cdc1ce28a09}
+--------------------
+
+vboxmanage modifyvm "Teacher_Desktop" --nested-hw-virt on
