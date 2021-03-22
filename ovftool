@@ -1,0 +1,2 @@
+ovftool.exe path_to_your_OVA_file.ova Path_to_your_OVF_file.ovf
+ovftool.exe path_to_your_OVF_file.ovf Path_to_your_OVA_file.ova
