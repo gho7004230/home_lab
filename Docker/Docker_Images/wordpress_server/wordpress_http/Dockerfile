@@ -1,5 +1,9 @@
 FROM ubuntu:latest
 
+ENV TZ=America/Chicago
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get update && apt-get -y install \
     apache2 \
     php \
@@ -7,7 +11,7 @@ RUN apt-get update && apt-get -y install \
     wget
     
 RUN wget https://wordpress.org/latest.tar.gz && \
-    tar xzvf latest.tar.gz \
+    tar xzvf latest.tar.gz && \
     cp -R ./wordpress/* /var/www/html && \
     rm /var/www/html/index.html
     
