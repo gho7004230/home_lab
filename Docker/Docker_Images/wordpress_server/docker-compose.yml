@@ -1,0 +1,30 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: P@ssw0rd!
+      MYSQL_ROOT_PASSWORD: P@ssw0rd!
+    volumes:
+    - db:/var/lib/mysql
+
+  web:
+     image: wordpress
+     restart: always
+     ports:
+     - 80:80
+     environment:
+       WORDPRESS_DB_HOST: db
+       WORDPRESS_DB_USER: wpuser
+       WORDPRESS_DB_PASSSWORD: P@ssw0rd!
+       WORDPRESS_DB_NAME: wordpress
+     volumes:
+     - wordpress:/var/www/html
+
+volumes:
+  db:
+  wordpress:
