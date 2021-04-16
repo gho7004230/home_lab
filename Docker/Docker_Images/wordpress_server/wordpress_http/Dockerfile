@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+mFROM ubuntu:latest
 
 ENV TZ=America/Chicago
 # Req'd for new versions of Ubuntu. Need to set timezone up front
