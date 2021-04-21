@@ -1,0 +1,14 @@
+Enable TLSv1.0 on VMware Connection Server
+To enable TLSv1.0 on VMware Connection Server:
+
+Start the ADSI Edit utility on your View Connection Server host.
+In the console tree, select Connect to.
+In the Select or type a Distinguished Name, type the distinguished name DC=vdi,DC=vmware, DC=int.
+In the Computer pane, select or type localhost:389 or the fully qualified domain name (FQDN) of the View Connection Server host followed by port 389.
+Expand the ADSI Edit tree, expand OU=Properties, select OU=Global, and double-click CN=Common.
+In the Properties dialog box, edit the pae-ClientSSLSecureProtocols attribute to add this entry:
+
+\LIST:TLSv1.2,TLSv1.1,TLSv1
+ 
+Click OK.
+Restart the VMware Horizon View Connection Server service on each connection server instance.
