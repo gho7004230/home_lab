@@ -1,3 +1,5 @@
 # 1. Install ovftool
-# 2. run command to convert ova to ovf:
+# 2. Run command to convert ova to ovf:
 c:\'Program Files'\VMWare\VmWare OVF Tool\ovftool.exe --acceptAllEulas --allowExtraConfig --allowAllExtraConfig {location of ova} {location of ovf}
+# 3. Delete mf file
+# 4. Import into vCenter Server
