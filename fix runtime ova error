@@ -1,0 +1,3 @@
+# 1. Install ovftool
+# 2. run command to convert ova to ovf:
+c:\'Program Files'\VMWare\VmWare OVF Tool\ovftool.exe --acceptAllEulas --allowExtraConfig --allowAllExtraConfig {location of ova} {location of ovf}
