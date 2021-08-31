@@ -1,10 +1,14 @@
-# Installs Powershell to Centos7 VM
+# Playbook to Install PowerShell & Dependencies on CentOS
 ---
-- hosts: localhost
-  connection: local
+- name: Install PowerShell & Deps to CentOS
+  hosts: localhost
+  vars_files:
+    - vars/software
+    
   tasks:
-  - name: Install Powershell and Dependencies
+
+  - name: install packages    
     yum:
-      name:
-      state: present
- ...
+      with_items: "{{ powershell_pkg }}"
+      state: latest
+...
