@@ -1,0 +1,20 @@
+Hardware & OS Requirements:
+Centos 7 VM updated
+2x2 CPUs, 16 GB RAM, 100GB HDD (thin)
+
+Centos/RHEL Software Packages:
+aspnetcore-runtime
+aspnetcore-targeting-pack
+dotnet-apphost-pack
+dotnet-host
+dotnet-hostfxr
+dotnet-runtime
+dotnet-runtime-deps
+dotnet-sdk
+dotnet-targeting-pack
+netstandard-targeting-pack
+powershell
+
+Additional Software:
+PowerCLI (all packages)
+
