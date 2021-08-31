@@ -1,0 +1,10 @@
+# Installs Powershell to Centos7 VM
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: Install Powershell and Dependencies
+    yum:
+      name:
+      state: present
+ ...
