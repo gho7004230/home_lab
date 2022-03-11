@@ -1,0 +1,27 @@
+Install gitlab on Oracle Linux 8
+
+sudo yum install -y curl policycoreutils-python3 openssh-server perl
+
+sudo systemctl enable sshd
+
+sudo systemctl start sshd
+
+sudo firewall-cmd --permanent --add-service=http
+
+sudo firewall-cmd --permanent --add-service=https
+
+sudo systemctl reload firewalld
+
+sudo yum install postfix
+
+sudo systemctl enable postfix
+
+sudo systemctl start postfix
+
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo os=el dist=8 bash
+
+sudo EXTERNAL_URL="https://gitlab.{domain_name}" yum install -y gitlab-ee
+
+cat /etc/gitlab/initial_root_password (copy)
+
+Use this password with username root to login with browser
